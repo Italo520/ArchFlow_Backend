@@ -29,11 +29,6 @@ Todas as tarefas devem seguir o ciclo de vida abaixo para garantir qualidade, co
 
 #### Sprint 0: Fundação e Ambiente
 
-*   **ID:** FE-ENV-003
-*   **Título:** [Frontend] Configurar Ambiente Local com React (Vite)
-*   **Descrição:** Inicializar o projeto React utilizando Vite e JavaScript. Adicionar as dependências react-router-dom para roteamento, axios para chamadas HTTP e configurar a estrutura de pastas base (components, pages, services).
-*   **Agentes Envolvidos:** Frontend-Agent.
-
 *   **ID:** DEVOPS-CI-004
 *   **Título:** [DevOps] Configurar Validação Automática com GitHub Actions
 *   **Descrição:** Criar um workflow de Integração Contínua (CI) em ambos os repositórios que executa o build (./mvnw clean package para o backend, npm run build para o frontend) a cada push na branch develop para garantir a integridade do código.
@@ -117,3 +112,8 @@ Todas as tarefas devem seguir o ciclo de vida abaixo para garantir qualidade, co
 *   **Título:** [Backend] Configurar Ambiente Local com Spring Boot e PostgreSQL
 *   **Descrição:** Inicializar o projeto Spring Boot com as dependências essenciais (Web, Security, Data JPA) e configurar um banco de dados PostgreSQL local via Docker, garantindo que a aplicação conecte-se ao banco ao subir.
 *   **Agentes Envolvidos:** Backend-Agent.
+
+*   **ID:** FE-ENV-003
+*   **Título:** [Frontend] Configurar Ambiente Local com React (Vite)
+*   **Descrição:** Inicializar o projeto React utilizando Vite e JavaScript. Adicionar as dependências react-router-dom para roteamento, axios para chamadas HTTP e configurar a estrutura de pastas base (components, pages, services).
+*   **Agentes Envolvidos:** Frontend-Agent.
