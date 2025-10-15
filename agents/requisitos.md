@@ -46,11 +46,6 @@ Todas as tarefas devem seguir o ciclo de vida abaixo para garantir qualidade, co
 
 #### Sprint 1: Autenticação e Criação de Projetos
 
-*   **ID:** BE-AUTH-005
-*   **Título:** [Backend] Criar Endpoint de Cadastro de Usuário
-*   **Descrição:** Desenvolver o endpoint POST /auth/register que cria um novo usuário no banco de dados. A senha deve ser criptografada com BCrypt e o sistema deve validar se o e-mail já está em uso.
-*   **Agentes Envolvidos:** Backend-Agent.
-
 *   **ID:** FE-AUTH-006
 *   **Título:** [Frontend] Construir Página de Cadastro
 *   **Descrição:** Desenvolver a interface da página de cadastro (/cadastro) em React, incluindo o formulário com validação e a integração com o endpoint POST /auth/register.
@@ -132,3 +127,8 @@ Todas as tarefas devem seguir o ciclo de vida abaixo para garantir qualidade, co
 *   **Título:** [DevOps] Configurar Validação Automática com GitHub Actions
 *   **Descrição:** Criar um workflow de Integração Contínua (CI) em ambos os repositórios que executa o build (./mvnw clean package para o backend, npm run build para o frontend) a cada push na branch develop para garantir a integridade do código.
 *   **Agentes Envolvidos:** DevOps-Agent.
+
+*   **ID:** BE-AUTH-005
+*   **Título:** [Backend] Criar Endpoint de Cadastro de Usuário
+*   **Descrição:** Desenvolver o endpoint POST /auth/register que cria um novo usuário no banco de dados. A senha deve ser criptografada com BCrypt e o sistema deve validar se o e-mail já está em uso.
+*   **Agentes Envolvidos:** Backend-Agent.
