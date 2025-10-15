@@ -29,11 +29,6 @@ Todas as tarefas devem seguir o ciclo de vida abaixo para garantir qualidade, co
 
 #### Sprint 0: Fundação e Ambiente
 
-*   **ID:** DEVOPS-SETUP-001
-*   **Título:** [Git] Criar e Estruturar Repositórios no GitHub
-*   **Descrição:** Criar os repositórios projeto-arquitetura-backend e projeto-arquitetura-frontend, estabelecendo as branches main (protegida) e develop, além dos arquivos .gitignore e README.md iniciais.
-*   **Agentes Envolvidos:** DevOps-Agent.
-
 *   **ID:** BE-ENV-002
 *   **Título:** [Backend] Configurar Ambiente Local com Spring Boot e PostgreSQL
 *   **Descrição:** Inicializar o projeto Spring Boot com as dependências essenciais (Web, Security, Data JPA) e configurar um banco de dados PostgreSQL local via Docker, garantindo que a aplicação conecte-se ao banco ao subir.
@@ -118,4 +113,7 @@ Todas as tarefas devem seguir o ciclo de vida abaixo para garantir qualidade, co
 (Nenhuma tarefa em andamento no momento)
 
 ### Tarefas Concluídas
-(Nenhuma tarefa concluída no momento)
+*   **ID:** DEVOPS-SETUP-001
+*   **Título:** [Git] Criar e Estruturar Repositórios no GitHub
+*   **Descrição:** Criar os repositórios projeto-arquitetura-backend e projeto-arquitetura-frontend, estabelecendo as branches main (protegida) e develop, além dos arquivos .gitignore e README.md iniciais.
+*   **Agentes Envolvidos:** DevOps-Agent.
