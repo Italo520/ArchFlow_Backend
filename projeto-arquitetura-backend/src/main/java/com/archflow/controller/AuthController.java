@@ -1,5 +1,7 @@
 package com.archflow.controller;
 
+import com.archflow.dto.LoginRequest;
+import com.archflow.dto.LoginResponse;
 import com.archflow.dto.RegisterRequest;
 import com.archflow.dto.UserResponse;
 import com.archflow.model.User;
@@ -23,5 +25,10 @@ public class AuthController {
         User user = authService.register(registerRequest);
         UserResponse userResponse = new UserResponse(user.getId(), user.getFullName(), user.getEmail());
         return ResponseEntity.ok(userResponse);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
+        return ResponseEntity.ok(authService.login(loginRequest));
     }
 }
