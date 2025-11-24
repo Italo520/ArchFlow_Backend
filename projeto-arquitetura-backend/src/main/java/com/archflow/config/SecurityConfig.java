@@ -31,8 +31,7 @@ public class SecurityConfig {
                                                 .sessionCreationPolicy(
                                                                 org.springframework.security.config.http.SessionCreationPolicy.STATELESS))
                                 .authenticationProvider(authenticationProvider)
-                                .addFilterBefore(jwtAuthFilter,
-                                                org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
+                                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
                 return http.build();
         }
 

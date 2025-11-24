@@ -12,65 +12,67 @@ import com.archflow.repository.StageRepository;
 import com.archflow.repository.TaskRepository;
 import com.archflow.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
 public class TaskService {
 
-    @Autowired
-    private TaskRepository taskRepository;
+        @Autowired
+        private TaskRepository taskRepository;
 
-    @Autowired
-    private ProjectRepository projectRepository;
+        @Autowired
+        private ProjectRepository projectRepository;
 
-    @Autowired
-    private StageRepository stageRepository;
+        @Autowired
+        private StageRepository stageRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+        @Autowired
+        private UserRepository userRepository;
 
-    public TaskDTO createTask(CreateTaskRequest request) {
-        Project project = projectRepository.findById(request.getProjectId())
-                .orElseThrow(() -> new RuntimeException("Project not found"));
+        public TaskDTO createTask(@NonNull CreateTaskRequest request) {
+                Project project = projectRepository.findById(Objects.requireNonNull(request.getProjectId()))
+                                .orElseThrow(() -> new RuntimeException("Project not found"));
 
-        Stage stage = stageRepository.findById(request.getStageId())
-                .orElseThrow(() -> new RuntimeException("Stage not found"));
+                Stage stage = stageRepository.findById(Objects.requireNonNull(request.getStageId()))
+                                .orElseThrow(() -> new RuntimeException("Stage not found"));
 
-        User assignee = null;
-        if (request.getAssigneeId() != null) {
-            assignee = userRepository.findById(request.getAssigneeId())
-                    .orElseThrow(() -> new RuntimeException("Assignee not found"));
+                User assignee = null;
+                if (request.getAssigneeId() != null) {
+                        assignee = userRepository.findById(Objects.requireNonNull(request.getAssigneeId()))
+                                        .orElseThrow(() -> new RuntimeException("Assignee not found"));
+                }
+
+                Task task = new Task();
+                task.setDescription(request.getDescription());
+                task.setProject(project);
+                task.setStage(stage);
+                task.setAssignee(assignee);
+
+                Task savedTask = taskRepository.save(task);
+                return mapToDTO(savedTask);
         }
 
-        Task task = new Task();
-        task.setDescription(request.getDescription());
-        task.setProject(project);
-        task.setStage(stage);
-        task.setAssignee(assignee);
+        public TaskDTO updateTaskStage(@NonNull UUID taskId, @NonNull UpdateTaskStageRequest request) {
+                Task task = taskRepository.findById(Objects.requireNonNull(taskId))
+                                .orElseThrow(() -> new RuntimeException("Task not found"));
 
-        Task savedTask = taskRepository.save(task);
-        return mapToDTO(savedTask);
-    }
+                Stage stage = stageRepository.findById(Objects.requireNonNull(request.getStageId()))
+                                .orElseThrow(() -> new RuntimeException("Stage not found"));
 
-    public TaskDTO updateTaskStage(UUID taskId, UpdateTaskStageRequest request) {
-        Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new RuntimeException("Task not found"));
+                task.setStage(stage);
+                Task updatedTask = taskRepository.save(task);
+                return mapToDTO(updatedTask);
+        }
 
-        Stage stage = stageRepository.findById(request.getStageId())
-                .orElseThrow(() -> new RuntimeException("Stage not found"));
-
-        task.setStage(stage);
-        Task updatedTask = taskRepository.save(task);
-        return mapToDTO(updatedTask);
-    }
-
-    private TaskDTO mapToDTO(Task task) {
-        return new TaskDTO(
-                task.getId(),
-                task.getDescription(),
-                task.getStage().getId(),
-                task.getAssignee() != null ? task.getAssignee().getId() : null);
-    }
+        private TaskDTO mapToDTO(@NonNull Task task) {
+                return new TaskDTO(
+                                Objects.requireNonNull(task.getId()),
+                                task.getDescription(),
+                                Objects.requireNonNull(task.getStage().getId()),
+                                task.getAssignee() != null ? task.getAssignee().getId() : null);
+        }
 }

@@ -6,11 +6,13 @@ import com.archflow.model.User;
 import com.archflow.repository.ProjectRepository;
 import com.archflow.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -29,7 +31,7 @@ public class ProjectService {
     @Autowired
     private com.archflow.repository.TaskRepository taskRepository;
 
-    public ProjectDTO createProject(ProjectDTO projectDTO) {
+    public ProjectDTO createProject(@NonNull ProjectDTO projectDTO) {
         String email = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
                 .getUsername();
         User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
@@ -48,7 +50,7 @@ public class ProjectService {
         return mapToDTO(savedProject);
     }
 
-    private void createDefaultStages(Project project) {
+    private void createDefaultStages(@NonNull Project project) {
         List<String> defaultStages = List.of("To Do", "In Progress", "Done");
         for (int i = 0; i < defaultStages.size(); i++) {
             com.archflow.model.Stage stage = new com.archflow.model.Stage();
@@ -69,8 +71,8 @@ public class ProjectService {
                 .collect(Collectors.toList());
     }
 
-    public com.archflow.dto.ProjectDetailsDTO getProjectById(UUID id, UUID assigneeId) {
-        Project project = projectRepository.findById(id)
+    public com.archflow.dto.ProjectDetailsDTO getProjectById(@NonNull UUID id, UUID assigneeId) {
+        Project project = projectRepository.findById(Objects.requireNonNull(id))
                 .orElseThrow(() -> new RuntimeException("Project not found"));
 
         List<com.archflow.model.Stage> stages = stageRepository.findByProjectIdOrderByOrderAsc(id);
@@ -89,30 +91,34 @@ public class ProjectService {
                     .filter(task -> task.getStage().getId().equals(stage.getId()))
                     .map(this::mapToTaskDTO)
                     .collect(Collectors.toList());
-            return new com.archflow.dto.StageDTO(stage.getId(), stage.getName(), stage.getOrder(), stageTasks);
+            return new com.archflow.dto.StageDTO(
+                    Objects.requireNonNull(stage.getId()),
+                    stage.getName(),
+                    stage.getOrder(),
+                    stageTasks);
         }).collect(Collectors.toList());
 
         return new com.archflow.dto.ProjectDetailsDTO(
-                project.getId(),
+                Objects.requireNonNull(project.getId()),
                 project.getName(),
                 project.getClientName(),
                 project.getStatus(),
                 stageDTOs);
     }
 
-    private ProjectDTO mapToDTO(Project project) {
+    private ProjectDTO mapToDTO(@NonNull Project project) {
         return new ProjectDTO(
-                project.getId(),
+                Objects.requireNonNull(project.getId()),
                 project.getName(),
                 project.getClientName(),
                 project.getStatus());
     }
 
-    private com.archflow.dto.TaskDTO mapToTaskDTO(com.archflow.model.Task task) {
+    private com.archflow.dto.TaskDTO mapToTaskDTO(@NonNull com.archflow.model.Task task) {
         return new com.archflow.dto.TaskDTO(
-                task.getId(),
+                Objects.requireNonNull(task.getId()),
                 task.getDescription(),
-                task.getStage().getId(),
+                Objects.requireNonNull(task.getStage().getId()),
                 task.getAssignee() != null ? task.getAssignee().getId() : null);
     }
 }

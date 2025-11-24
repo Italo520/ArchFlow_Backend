@@ -4,6 +4,7 @@ import com.archflow.dto.ProjectDTO;
 import com.archflow.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class ProjectController {
     private ProjectService projectService;
 
     @PostMapping
-    public ResponseEntity<ProjectDTO> createProject(@RequestBody ProjectDTO projectDTO) {
+    public ResponseEntity<ProjectDTO> createProject(@RequestBody @NonNull ProjectDTO projectDTO) {
         return ResponseEntity.ok(projectService.createProject(projectDTO));
     }
 
@@ -28,7 +29,7 @@ public class ProjectController {
 
     @GetMapping("/{id}")
     public ResponseEntity<com.archflow.dto.ProjectDetailsDTO> getProjectById(
-            @PathVariable UUID id,
+            @PathVariable @NonNull UUID id,
             @RequestParam(required = false) UUID assigneeId) {
         return ResponseEntity.ok(projectService.getProjectById(id, assigneeId));
     }

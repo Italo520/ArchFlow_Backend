@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+    darkMode: ["class"],
     content: [
         "./index.html",
         "./src/**/*.{js,ts,jsx,tsx}",
@@ -13,7 +14,7 @@ export default {
                 background: "hsl(var(--background))",
                 foreground: "hsl(var(--foreground))",
                 primary: {
-                    DEFAULT: "hsl(var(--primary))",
+                    DEFAULT: "#1b1818",
                     foreground: "hsl(var(--primary-foreground))",
                 },
                 secondary: {
@@ -40,11 +41,19 @@ export default {
                     DEFAULT: "hsl(var(--card))",
                     foreground: "hsl(var(--card-foreground))",
                 },
+                "background-light": "#f7f7f7",
+                "background-dark": "#1a1818",
+                "status-todo": "#FFC107",
+                "status-progress": "#2196F3",
+                "status-done": "#4CAF50",
             },
             borderRadius: {
                 lg: "var(--radius)",
                 md: "calc(var(--radius) - 2px)",
                 sm: "calc(var(--radius) - 4px)",
+            },
+            fontFamily: {
+                "display": ["Inter", "sans-serif"]
             },
         },
     },
