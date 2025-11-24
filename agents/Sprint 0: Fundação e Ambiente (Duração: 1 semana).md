@@ -1,5 +1,5 @@
 
-# Sprint 0: Fundação e Ambiente (Duração: 1 semana)
+# Sprint 0- Fundação e Ambiente (Duração: 1 semana)
 
 **Meta do Sprint:** Configurar toda a infraestrutura e os ambientes de desenvolvimento para que a equipe possa começar a construir as funcionalidades.
 
